@@ -1,0 +1,23 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{            }\PYG{n}{CALCUL\PYGZus{}STATISTIQUE}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)\PYGZob{}}
+
+\PYG{+w}{                }\PYG{n}{n.moins}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sum}\PYG{p}{(}\PYG{n}{echantillon}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{hatpi}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{+}\PYG{n}{eta}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{))}\PYG{o}{*}\PYG{n}{n.moins}\PYG{o}{/}\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{eta}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}
+
+\PYG{+w}{                }\PYG{n}{n.plus}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{n.moins}
+
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{n}{n.plus}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m}{0}\PYG{+w}{ }\PYG{o}{|}\PYG{+w}{ }\PYG{n}{n.moins}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m}{0}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{an}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{1}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{n}{else}\PYG{p}{\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{denom.1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{n.moins}\PYG{o}{/}\PYG{p}{(}\PYG{n}{eta}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{hatpi}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}
+\PYG{+w}{                    }\PYG{n}{denom.2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{n.plus}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{hatpi}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}
+\PYG{+w}{                    }\PYG{n}{an}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{n}\PYG{o}{/}\PYG{p}{(}\PYG{n}{denom.1}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{denom.2}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{                }\PYG{n}{s}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{n}\PYG{o}{/}\PYG{n}{an}\PYG{p}{)}\PYG{o}{*}\PYG{n}{hatpi}
+
+\PYG{+w}{                }\PYG{n+nf}{return}\PYG{p}{(}\PYG{n+nf}{c}\PYG{p}{(}\PYG{n}{hatpi}\PYG{p}{,}\PYG{n}{an}\PYG{p}{,}\PYG{n}{s}\PYG{p}{))}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+
+\end{Verbatim}

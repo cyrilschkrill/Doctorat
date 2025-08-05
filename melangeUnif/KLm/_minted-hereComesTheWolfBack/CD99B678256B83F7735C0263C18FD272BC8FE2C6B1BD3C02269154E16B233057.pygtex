@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{            }\PYG{n}{VECTEUR\PYGZus{}T}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{matrice.dechantillonnage}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{discretisation.Theta\PYGZus{}2}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{vecteur.s}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sapply}\PYG{p}{(}\PYG{n}{X}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{discretisation.Theta\PYGZus{}2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FUN}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{MATRICE\PYGZus{}STATISTIQUE}\PYG{p}{(}\PYG{n}{matrice.dechantillonnage}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}\PYG{o}{\PYGZdl{}}\PYG{n}{s}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}vecteur.s\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{vecteur.s}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{vecteur.t}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{apply}\PYG{p}{(}\PYG{n}{X}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{vecteur.s}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{FUN}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{max}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{MARGIN}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}vecteur.t\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{vecteur.t}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

@@ -1,0 +1,8 @@
+\babel@toc {french}{}\relax 
+\contentsline {section}{\numberline {1}Go !}{2}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Algorithme de test}{2}{subsection.1.1}%
+\contentsline {subsubsection}{\numberline {1.1.1}Cadre de la divergence de Kullback-Leibler \textit {modifiée}}{2}{subsubsection.1.1.1}%
+\contentsline {section}{\numberline {2}Découpe}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Algorithme principal}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Cas spécifique au mélange de lois uniformes sous la divergence KL$_m$}{7}{subsection.2.2}%
+\contentsline {subsubsection}{\numberline {2.2.1}Matrice $[{t}_{k,\tilde {k}}]$}{10}{subsubsection.2.2.1}%

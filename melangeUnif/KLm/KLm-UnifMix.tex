@@ -1,0 +1,86 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc} 
+
+\usepackage{hyperref}
+
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\setlength{\parindent}{0em}
+
+\usepackage{tikz}
+
+\usepackage[french]{babel}  
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{float}
+
+\usepackage{bigints}
+\usepackage{relsize}
+
+\usepackage{bbold}
+
+\usepackage{cancel}
+
+\usepackage{xcolor}
+
+\makeatletter
+\newcommand{\RemoveAlgoNumber}{\renewcommand{\fnum@algocf}{\AlCapSty{\AlCapFnt\algorithmcfname}}}
+\newcommand{\RevertAlgoNumber}{\algocf@resetfnum}
+\makeatother
+
+\usepackage{minted}
+\usepackage{newfloat}
+\DeclareFloatingEnvironment{script} % new float <<<<
+
+
+\newtheorem{theorem}{Théorème}
+\newtheorem{contre-exemple}{Contre-exemple}
+\newtheorem{corollary}{Corollaire}
+\newtheorem{proposition}{Proposition}
+\newtheorem{hyp}{Hypothèse}
+\newtheorem{definition}{Définition}
+
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{caption}
+
+\newenvironment{fonction}[1][htb]
+  {\renewcommand{\algorithmcfname}{Fonction}% Update algorithm name
+   \begin{algorithm}[#1]%
+  }{\end{algorithm}}
+
+\definecolor{bg}{RGB}{22,43,58}
+
+
+\title{KL$_m$ et Mélanges Uniformes}
+\author{Cyril THOMMERET \\ LPSM - Sorbonne Université \\ SAFRAN Aircraft Engines}
+\date{\today}
+
+
+
+\begin{document}
+    \maketitle
+    \tableofcontents
+    \vspace*{1.2cm}
+    Nous avions défini, pour une fonction $\varphi$ génératrice d'une divergence, le critère suivant:
+    $$ m_{\pi,\theta}:\, x\in\mathrm{supp}\,g\, \longmapsto \int(\varphi^\prime\circ\dfrac{g}{g_{\pi,\theta}})(t)\cdot{}g(t)\mathrm{d}t - (\varphi^\#\circ\dfrac{g}{g_{\pi,\theta}})(x)$$
+    où $\varphi^\prime$ est la dérivée de $\varphi$ et où $\varphi^\#\equiv{}\mathrm{id}\circ\varphi^\prime - \varphi$. \\
+
+    \section{Le contexte dans le cas KL$_m$}
+    \subsection{Cas général}
+
+    La fonction génératrice de la divergence de Kullback-Leiber \textit{modifiée} prend la forme suivante: 
+    $$ \varphi_{KL_m}(x) := -\ln\,x+x-1 $$
+
+    De sorte que sa dérivée soit égale à $\varphi_{KL_m}^\prime(x) = 1 - \frac{1}{x}$, et que donc,
+    
+    \begin{align*}
+      \varphi^\#_{KL_m}(x)   :& = x\cdot\varphi_{KL_m}^\prime(x) + \varphi^\prime_{KL_m}(x) \\
+                              & = x\cdot(1-\frac{1}{x}) + \ln{}x - x + 1 \\
+                              & = \ln{}x
+    \end{align*}
+
+
+
+\end{document}

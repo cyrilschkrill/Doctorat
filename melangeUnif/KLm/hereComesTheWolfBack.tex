@@ -1,0 +1,476 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc} 
+
+\usepackage{hyperref}
+
+\usepackage[a4paper, total={6in, 8in}]{geometry}
+\setlength{\parindent}{0em}
+
+\usepackage{tikz}
+\usepackage{changepage}
+
+\usepackage[french]{babel}  
+
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm}
+
+\usepackage{float}
+
+\usepackage{bbold}
+
+\usepackage{cancel}
+\hbadness=99999
+% \usepackage{algorithm}
+% \usepackage{algpseudocode}
+
+\makeatletter
+\newcommand{\RemoveAlgoNumber}{\renewcommand{\fnum@algocf}{\AlCapSty{\AlCapFnt\algorithmcfname}}}
+\newcommand{\RevertAlgoNumber}{\algocf@resetfnum}
+\makeatother
+
+
+\newtheorem{theorem}{Théorème}
+\newtheorem{contre-exemple}{Contre-exemple}
+\newtheorem{corollary}{Corollaire}
+\newtheorem{proposition}{Proposition}
+\newtheorem{hyp}{Hypothèse}
+\newtheorem{definition}{Définition}
+
+\usepackage{minted}
+\usepackage{newfloat}
+\DeclareFloatingEnvironment{script} % new float <<<<
+
+
+% \algnewcommand\algorithmicinput{\textbf{Données apriori:}}
+% \algnewcommand\Apriori{\item[\algorithmicinput]}
+
+
+% \newenvironment{fonction}[1][]
+%   {\renewcommand{\algorithmcfname}{Fonction}
+%    \begin{algorithm}[#1]%
+%   }{\end{algorithm}}
+
+\usepackage[ruled,vlined]{algorithm2e}
+\usepackage{caption}
+
+\newenvironment{fonction}[1][htb]
+  {\renewcommand{\algorithmcfname}{Fonction}% Update algorithm name
+   \begin{algorithm}[#1]%
+  }{\end{algorithm}}
+
+\definecolor{bg}{RGB}{22,43,58}
+
+
+
+\title{}
+\author{Cyril THOMMERET \\ LPSM - Sorbonne Université \\ SAFRAN Aircraft Engines}
+\date{\today}
+
+
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+    \fbox{{\color{red}$\eta\neq0\,\neq1$}} \\
+
+    On génère $n_{exp}$ données $t_k$ et autant d'échantillons $\tilde{t}_{k,\tilde{k}}$ de taille $\tilde{n}$. \\
+
+    On compare ensuite pour chaque $k$ (allant de $1$ à $n_{exp}$), le quantile d'ordre $p$ (ou $p_i$) de $(\tilde{t}_{k,\tilde{k}})_{1\leq \tilde{k}\leq \tilde{n}}$ avec la valeur $t_k$ correspondante. \\
+
+    La probabilité de rejet est ainsi définie: $r:=\dfrac{1}{n_{exp}}\cdot\sum_{k=1}^{n_{exp}}\mathbb{1}_{t_k\geq \tilde{t}_{k,(\lceil \tilde{n}\cdot p \rceil)}}$
+
+
+    \section{Go !}
+
+        Nous appliquons le résultat pour les mélanges à deux composantes uniformes. \\
+
+        Le cadre adopté dans les analyses numériques est celui où le paramétrage de la première composante est entièrement déterminé (c'est-à-dire parfaitement connu.) Autrement dit, le paramètre $\theta_1^\star$ est supposé connu. \\
+
+        En ce qui concerne la seconde composante, nous le supposons inconnu mais en nous pliant à la contrainte qu'il soit de dimension 1 ($i.e.$: undimensionel.) \\
+
+        Bien sûr la proportion $\pi^\star$ avec laquelle intervient la seconde composante sera également supposée incconue. 
+
+        \subsection{Algorithme de test}
+
+            L'objectif de cet algorithme est double. \\
+
+            Il nous permettra dans un premier temps de vérifier la convergence en loi de la statistique de test avec celle du suprémum du processus gaussien. {\color{green} Puis ?}\\
+
+            \subsubsection{Cadre de la divergence de Kullback-Leibler \textit{modifiée}}
+
+                {\color{red} Compte tenu des études précédemment réalisées, un simple rappel suffirait !}\\
+    
+                Rappelons que cette divergence est liée à la fonction génératrice:
+            \subsubsection*{Fonction génératrice}
+                La fonction génératrice est: $\quad \varphi_{KL_m}(x):=-\ln{}x+x-1$, d'où $\varphi_{KL_m}(x) = 1 - \frac{1}{x}$. \\
+                Ainsi,
+                \begin{align*}
+                    \varphi^\#_{KL_m}(x)   :& = x\cdot\varphi_{KL_m}^\prime(x) + \varphi^\prime_{KL_m}(x) \\
+                                            & = x\cdot(1-\frac{1}{x}) + \ln{}x - x + 1 \\
+                                            & = \ln{}x
+                \end{align*}
+            \subsubsection*{Calcul de $m_{\pi,\theta_2}(x)$}
+                $m^{KL_m}_{\pi,\theta_2}(x) := \ln{}g_{\pi,\theta_2}(x) - \ln{}g(x) \qquad (\forall{}x\in\mathrm{supp}\, g_{\pi,\theta})$ 
+            \subsubsection*{Calcul de $\hat\pi_n(\theta_2)$}
+                Soit $\hat\pi_n(\theta_2) := \arg\max_{\pi}\, \mathbb{P}_n{}m_{\pi,\theta}\quad$ où $\mathbb{P}_n{}m_{\pi,\theta} = \frac{1}{n}\sum_{i=1}^n\, m_{\pi,\theta}(X_i)$. \\
+
+                $$ \hat\pi_n(\theta_2) = \arg\max_{\pi}\, \frac{1}{n}\cdot\sum_{i=1}^n\, \{ \ln{}g_{\pi,\theta_1^\star,\theta_2}(x) - \ln{}g(x) \} $$
+
+                $$ \hat\pi(\mathbb{X},\eta) = \{1+\dfrac{\eta}{1-\eta}\}\cdot\dfrac{n_-(\mathbb{X},\eta)}{n_{exp}} - \dfrac{\eta}{1-\eta} $$
+
+
+            \subsubsection*{Calcul de $a_n(\theta_2)$}
+                \begin{align*}
+                    a_n & :=   \mathbb{P}_n\,\Psi_{\hat\pi}^2 \,\big/\, H_n^2 \\
+                        & \,=  \mathbb{P}_n\Big[ (\partial_\pi\,{}m_{\hat\pi,\eta})^2 \Big] \,\big/\, \big\{ \partial^2_\pi\,\big[\,\mathbb{P}_n\,{}m_{\hat\pi,\eta}\,\big]\, \big\}^2 \qquad \mbox{(selon les définitions)} \\
+                        & \,=  \mathbb{P}_n\Big[ (\partial_\pi\,{}m_{\hat\pi,\eta})^2 \Big] \,\big/\, \Big[ \mathbb{P}_n\, \partial^2_\pi\,{}m_{\hat\pi,\eta}\, \Big]^2 \qquad \mbox{(dérivation terme à terme d'une somme finie)} \\
+                        & \,=  \mathbb{P}_n\Big[ (\partial_\pi\,{}m_{\hat\pi,\eta})^2 \Big] \,\big/\, \Big[ \mathbb{P}_n\, -(\partial_\pi\,{}m_{\hat\pi,\eta})^2\, \Big]^2 \qquad \mbox{(identité de l'information de Fisher)}\\
+                        & \,=  \mathbb{P}_n\Big[ (\partial_\pi\,{}m_{\hat\pi,\eta})^2 \Big] \,\big/\, \Big[ -\,\mathbb{P}_n\, (\partial_\pi\,{}m_{\hat\pi,\eta})^2\, \Big]^2 \\
+                \implies    a_n & \,= \,1 \,\big/\, \Big[ \mathbb{P}_n\, (\partial_\pi\,{}m_{\hat\pi,\eta})^2\, \Big]
+                \end{align*}
+                Or, pour tout $x\in\mathbb{R}$, $\quad \partial_\pi\,{}m_{\hat\pi,\eta}(x) = \dfrac{f_2(x;\eta)-f_1(x)}{g_{\hat\pi,\eta}(x)} $ \\
+
+                Finalement, 
+                    $ a_n = \Big[\, \mathbb{P}_n\,\Big\{\,\dfrac{f_2(\bullet;\eta)-f_1}{g_{\hat\pi,\eta}} \,\Big\}^2 \,\Big]^{-1} $ \\
+
+                    $\implies a_n^{-1} = \frac{1}{n}\sum_{i=1}^n\, \Big\{ \dfrac{f_2(X_i;\theta_2) - f_1(X_i;\theta_1^\star)}{g_{\hat\pi,\theta_1^\star,\theta_2}(X_i)} \Big\}^2$
+            \subsubsection*{Calcul des $b(t,t^\prime)$}
+                $b(t,t^\prime)$ est le coefficient $(1,1)$ de la matrice,
+                    $$  (\mathbb{P}_n\, H_n^t)^{-1}\cdot\{\mathbb{P}_n\, \psi^t_n\psi_n^{t^\prime}\}\cdot\mathbb{P}_n\, (H_n^{t^\prime})^{-1} $$
+                Lorsque $\theta_1^\star$ est supposé connu, nous avons:
+                \begin{align*}
+                    \psi_n^t    & \equiv \partial_\pi\, m_{\hat\pi_n(t),\theta_1^\star,t} \\
+                    H_n^t       & \equiv \partial^2_\pi\,m_{\hat\pi_n(t),\theta_1^\star,t}
+                \end{align*}
+                Or,
+                \begin{align*}
+                    \partial_\pi m_{\pi,\theta} & \equiv \dfrac{\partial_\pi g_{\pi,\theta}}{g_{\pi,\theta}} \\
+                    \partial^2_\pi m_{\pi,\theta} & \equiv - (\partial_\pi m_{\pi,\theta})^2 
+                \end{align*}
+                Donc,
+                    $$ b(t,t^\prime) = \dfrac{\mathbb{P}_n\{ \partial_\pi m_{\hat\pi(t),t}\cdot\partial_\pi m_{\hat\pi(t^\prime),t^\prime}\}}{\mathbb{P}_n (\partial_\pi m_{\hat\pi(t),t})^2\cdot\mathbb{P}_n (\partial_\pi m_{\hat\pi(t^\prime),t^\prime})^2} $$
+
+    \section{Découpe}
+        \subsection{Algorithme principal}
+
+            Définissons $s(\mathbb{X},\eta) := \sqrt{\dfrac{|\mathbb{X}|}{a(\mathbb{X},\eta)}}\cdot\hat\pi(\mathbb{X},\eta)$. %de sorte que $s_k(\eta) := s(\mathbb{X}^{(k)},\eta)$.
+
+                \SetKw{Apriori}{Données a priori:}
+                \begin{algorithm}[h!]
+                \caption{Algorithme général: Test d'homogénéité}
+                    \Apriori $\phi$, $\{f_1\}$, $\{f_2\}$, $\theta_1^\star$ \\
+                    \vspace*{0.2cm}
+                    \textbf{Input:} $n$, $n_{exp}$, $\tilde{n}$, $\mathcal{D}(\Theta_2)$, $\tilde{\mathcal{D}}(\Theta_2)$, $p$ \\
+                    \begin{enumerate}
+                        \item Générer le plan d'échantillonnage $\mathbb{X}_{n_{exp},n} = 
+                        \begin{bmatrix}
+                            \mathbb{X}^{(1)} \\
+                            \mathbb{X}^{(2)} \\
+                            \ldots \\
+                            \mathbb{X}^{(n_{exp})}
+                        \end{bmatrix} =
+                        \begin{bmatrix}
+                            X_{1,1} & X_{1,2} & \ldots & X_{1,n} \\
+                            X_{2,1} & X_{2,2} & \ldots & X_{2,n} \\
+                            \vdots  & \vdots  & \ddots & \vdots  \\
+                            X_{n_{exp},1} & X_{n_{exp},2} & \ldots & X_{n_{exp},n}
+                        \end{bmatrix}$ 
+                        où $X_{i,j} \sim g_{\pi^\star,\theta^\star}$. \hfill \break       
+                        \item Générer le vecteur $(t_k)_{1\leq k\leq n_{exp}}$ où $t_k := \textrm{Max}_{\eta\in\mathcal{D}(\Theta_2)}\, s_k(\eta)$ avec $s_k(\eta) := s(\mathbb{X}^{(k)},\eta)$. \vspace*{0.2cm}
+                        \item Générer la matrice $[t_{k,\tilde{k}}]_{\substack{1\leq k\leq n_{exp} \\ 1\leq\tilde{k}\leq\tilde{n}}}$ où $t_{k,\tilde{k}}:=\mathrm{Max}_{\eta\in\tilde{\mathcal{D}}(\Theta_2)}\,Y_\eta(\mathbb{X}^{(k)})$
+                    \end{enumerate}
+                    \begin{flushright}
+                        avec $(Y_\eta(\mathbb{X}))_{\eta\in\tilde{\mathcal{D}}(\Theta_2)}\sim\mathcal{N}(0,\Sigma(\mathbb{X}))$ et $\Sigma(\mathbb{X}):=\Big[\dfrac{b(\mathbb{X,\eta,\eta^\prime})}{\sqrt{a(\mathbb{X},\eta)\cdot{}a(\mathbb{X},\eta^\prime)}}\Big]_{\eta,\eta^\prime\in\tilde{\mathcal{D}}(\Theta_2)}$
+                    \end{flushright}
+                    \begin{enumerate}
+                    \setcounter{enumi}{4}
+                        \item Calculer le vecteur des probabilités de rejet $r:=\dfrac{1}{n_{exp}}\cdot\sum_{k=1}^{n_{exp}}\mathbb{1}\{t_k\geq t_{k,(\lceil \tilde{n}\cdot (1-p) \rceil)}\}$
+                    \end{enumerate}
+                \end{algorithm}
+
+    % Dans un soucis de nous orienter dans une programmation dite par objets, nous allons découper chacun de ces points en terme de fronction. \\
+    
+    % \begin{algorithm}
+    %     \caption{Fonction: Génération du plan d'échantillonnage}
+    %     \begin{algorithmic}
+    %         % \Apriori $\{f_1\}$, $\{f_2\}$, $\theta_1^\star$ \\
+    %         % \vspace*{0.2cm}
+    %         \textbf{Input:} $n$, $n_{exp}$
+    %     \end{algorithmic}
+    % \end{algorithm}
+
+\clearpage
+\pagebreak
+
+    \RemoveAlgoNumber
+    \begin{fonction}
+       \caption{Spécification du modèle de mélange \textrm{`\textbf{spec}'} }
+            % \Apriori $\{f_1\}$, $\{f_2\}$, $\theta_1^\star$ \\
+            % \vspace*{0.2cm}
+            \textbf{Arguments:} \texttt{nomDistribution.1, nomDistribution.2, parametrage.1} \\
+            \textit{optionnels:} \texttt{nombreParametres.distribution\_2, positionParam.2\_inconnu, \hspace*{1.55cm} valeurParam.2\_connue}
+            \begin{itemize}
+                \item[$\bullet$] \texttt{nomDistribution.1, nomDistribution.2}: sont les noms des distributions des composantes du mélanges.
+                Elles sont de types \textit{string}. \\ Les valeurs admises sont: \texttt{"exp", "norm", "lnorm", "weibull","unif"}. \\
+                \vspace*{0.2cm}
+                Exemple: \texttt{nomDistribution.1 = "unif", nomDistribution.2 = "unif"} \\
+                \vspace*{0.2cm}
+                \item[$\bullet$] \texttt{parametrage.1}: est le paramétrage (supposé connu) de la premmière composante. \\
+                \vspace*{0.2cm}
+                Exemples:\begin{itemize}
+                    \item[] \texttt{nomDistribution.1 = "norm", parametrage.1 = c(0,1)} pour une loi normale centrée réduite.
+                    \item[] \texttt{nomDistribution.1 = "unif", parametrage.1 = c(-1,1)} pour une loi uniforme \\ sur $[-1,1]$. 
+                    \item[] \texttt{nomDistribution.1 = "exp", parametrage.1 = 0.5} pour une loi exponentielle de moyenne 2.
+                        \end{itemize}
+                \vspace*{0.2cm}
+                \item[$\bullet$] \texttt{nombreParametres.distribution\_2}: est le nombre de paramètre de la seconde composante (sa valeur par défaut vaut 1.) \\
+                \vspace*{0.2cm}
+                Exemples: \texttt{nomDistribution.2 = "norm", nombreParametres.distribution\_2 = 2}
+                \vspace*{0.2cm}
+                \item[$\bullet$] \texttt{positionParam.2\_inconnu}: est la position du paramètre inconnu invernant dans la définition des loi sous R (sa valeur par défaut vaut 1.) \\
+                \vspace*{0.2cm}
+                Exemples: 
+                    \begin{itemize}
+                        \item[] \texttt{nomDistribution.1 = "norm", positionParam.2\_inconnu = 1} si la moyenne est inconnue. 
+                        \item[] \texttt{nomDistribution.1 = "norm", positionParam.2\_inconnu = 1} si c'est l'écart-type qui n'est pas connu. 
+                    \end{itemize}
+                \vspace*{0.2cm}
+                \item[$\bullet$] \texttt{valeurParam.2\_connue}: valeur du paramètre connue de la seconde composante (sa valeur par défaut est \texttt{NaN}.)
+            \end{itemize}
+    \end{fonction}
+    \textbf{N.B.}: Les arguments optionnels sont nécessaires si et seulement si la seconde composante admet deux paramètres.
+
+    \begin{script}[h!]
+        \caption{Spécification du mélange}
+        \begin{minted}[linenos, breaklines, fontsize=\scriptsize, bgcolor=lightgray]{R}
+            specificationDuMelange = function(nomDistribution.1, 
+                                              nomDistribution.2, 
+                                              parametrage.1, 
+                                              nombreParametres.distribution_2 = 1,
+                                              positionParam.2_inconnu = 1,
+                                              valeurParam.2_connue = NaN){
+
+                distributionList = c("exp", "norm", "lnorm", "weibull","unif")
+                test = (nomDistribution.1 %in% distributionList) & (nomDistribution.1 %in% distributionList)
+                if( test == FALSE ){ print("Erreur de saisie dans le nom d'une des composantes")}
+
+                # PREMIERE COMPOSANTE # 
+                if(length(parametrage.1) == 1){
+                    rf1 = function(n) get(paste0("r", nomDistribution.1))(n, parametrage.1) 
+                    df1 = function(x) get(paste0("d", nomDistribution.1))(x, parametrage.1)
+                }
+                if(length(parametrage.1) == 2){
+                    rf1 = function(n) get(paste0("r", nomDistribution.1))(n, parametrage.1[1], parametrage.1[2])
+                    df1 = function(x) get(paste0("d", nomDistribution.1))(x, parametrage.1[1], parametrage.1[2])
+                }
+                assign("rf1", rf1, envir = .GlobalEnv)
+                assign("df1", df1, envir = .GlobalEnv)
+
+                # DEUXIEME COMPOSANTE #
+                if(nombreParametres.distribution_2 == 1){
+                    rf2 = function(n,eta) get(paste0("r", nomDistribution.2))(n, eta)
+                    df2 = function(x,eta) get(paste0("d", nomDistribution.2))(x, eta)
+                }
+                else{ # nombreParametres.distribution_2 == 2
+                if(nombreParametres.distribution_2 != 2) return("Erreur: Le nombre de paramètres de la composante ne peut que prendre les valeurs 1 ou 2.")
+                if(positionParam.2_inconnu == 1){
+                    rf2 = function(n,eta) get(paste0("r", nomDistribution.2))(n, eta, valeurParam.2_connue)
+                    df2 = function(x,eta) get(paste0("d", nomDistribution.2))(x, eta, valeurParam.2_connue)
+                }
+                else{ # positionParam.2_inconnu == 2
+                if(positionParam.2_inconnu != 2) return("Erreur: La position du paramètre inconnu de la seconde composante.")
+                    rf2 = function(n,eta) get(paste0("r", nomDistribution.2))(n, valeurParam.2_connue, eta)
+                    df2 = function(x,eta) get(paste0("d", nomDistribution.2))(x, valeurParam.2_connue, eta)
+                }
+                }
+                assign("rf2", rf2, envir = .GlobalEnv)
+                assign("df2", df2, envir = .GlobalEnv)
+
+                # FONCTIONS DU MELANGE #
+                rmix = function(n,pi,eta){
+                    output = sample(x = c(0,1), size = n, replace = TRUE, prob = c(1-pi,pi))
+                    
+                    nb1 = sum(output)
+                    
+                    output[output == 1] = rf2(nb1,eta)
+                    output[output == 0] = rf1(n-nb1)
+                    
+                    return(output)
+                }
+                dmix = function(x,pi,eta) (1-pi)*df1(x) + pi*df2(x,eta)
+
+                assign("rmix", rmix, envir = .GlobalEnv)
+                assign("dmix", dmix, envir = .GlobalEnv)
+            }
+        \end{minted}
+    \end{script}
+
+\clearpage
+\pagebreak
+    
+    \begin{fonction}
+        \caption{Génération du plan d'échantillonnage \texttt{MATRICE\_ECHANTILLONAGE}}
+        \Apriori Spécification du mélange via la fonction \texttt{SPECIFICATIION\_DU\_MELANGE}. \\
+        \vspace*{0.2cm}
+        \textbf{Arguments:} \texttt{nexp, n, pi.star, eta.star}
+        \begin{itemize}
+            \item[$\bullet$] \texttt{nexp}: nombre d'échantillon à générer.
+            \item[$\bullet$] \texttt{n}: taille des échantillons.
+        \end{itemize}
+        \vspace*{0.2cm}
+        \textbf{Définit lors de l'execution}: Dans l'environnement global ($i.e.$: \texttt{.GlobalEnv}) la matrice \texttt{matrice.dechantillonnage} de taille ($n_{exp}\times{}n$) où pour tout $i,j$: $\quad\mathbf{x}_{i,j}\sim{}g_{\pi^\star,\theta^\star}$.
+    \end{fonction}
+    \begin{script}[h]
+        \begin{minted}[linenos, breaklines, fontsize=\scriptsize, bgcolor=lightgray]{R}
+            MATRICE_ECHANTILLONNAGE = function(nexp, n, pi.star, eta.star){
+                if(!exists("rmix")) "La spécification du mélange n'a pas opérée."
+  
+                matrice.dechantillonnage = matrix(data = rmix(n = n*nexp, pi = pi.star, eta = eta.star), nrow = nexp, byrow = TRUE)
+                assign("matrice.dechantillonnage", matrice.dechantillonnage, envir = .GlobalEnv)
+            }
+        \end{minted}
+    \caption{Génération de la matrice d'échantillonnage}
+    \end{script}
+
+    \subsection{Cas spécifique au mélange de lois uniformes sous la divergence KL$_m$}
+
+    Rappelons les formules précédemment calculés dans ce cadre :
+
+    \begin{align*}
+        \hat\pi(\mathbb{X},\eta) & = \{1+\dfrac{\eta}{1-\eta}\}\cdot\dfrac{n_-(\mathbb{X},\eta)}{n_{exp}} - \dfrac{\eta}{1-\eta} \\
+        \mathrm{} \\
+        a(\mathbb{X},\eta) & = \frac{n}{\dfrac{n_{-}(\mathbb{X},\eta)}{\Big(\frac{\eta}{1-\eta}+\hat\pi(\mathbb{X},\eta)\Big)^2}\, + \dfrac{n_{+}(\mathbb{X},\eta)}{\Big(1-\hat\pi(\mathbb{X},\eta)\Big)^2}} \\
+        \mathrm{} \\
+        b(\mathbb{X};\eta,\eta^\prime) & = \frac{\mathbb{P}_n\{ \partial_\pi m_{\hat\pi(\mathbb{X},\eta),\eta}\cdot\partial_\pi m_{\hat\pi(\mathbb{X},\eta^\prime),\eta^\prime}\}}{\mathbb{P}_n \{(\partial_\pi m_{\hat\pi(\mathbb{X},\eta),\eta})^2\}\cdot\mathbb{P}_n \{(\partial_\pi m_{\hat\pi(\mathbb{X},\eta^\prime),\eta^\prime})^2\}} 
+    \end{align*}
+
+
+    \begin{fonction}
+        \caption{Sous-fonction \texttt{CALCUL\_STATISTIQUE} $\backslash\backslash$ Mélanges Uniformes \& KL$_m$}
+        \Apriori $\mathbb{X}(\omega)=\mathbf{x}$ \\
+        \vspace*{0.2cm}
+        \textbf{Arguments:} \texttt{echantillon, eta}
+        \begin{itemize}
+            \item[$\bullet$] \texttt{echantillon}: le vecteur des données $\mathbf{x}$.
+            \item[$\bullet$] \texttt{eta}: le paramètre $\eta$ sous lequel les calculs sont effectués. 
+        \end{itemize}
+        \textbf{Sortie:} \texttt{hatpi, an, s}
+        \begin{itemize}
+            \item[$\bullet$] \texttt{hatpi}: il s'agit de $\hat\pi(\mathbf{x},\eta)$ ;
+            \item[$\bullet$] \texttt{an}: correspond à $a(\mathbf{x},\eta)$ ;
+            \item[$\bullet$] \texttt{s}: renvoie à $s(\mathbf{x},\eta)$.   
+        \end{itemize}
+    \end{fonction}
+
+
+    \begin{script}
+        \caption{Calcul des statistques}
+        \begin{minted}[linenos, breaklines, fontsize=\scriptsize, bgcolor=lightgray]{R}
+            CALCUL_STATISTIQUE = function(echantillon, eta){
+  
+                n.moins = sum(echantillon < eta)
+                hatpi = (1+eta/(1-eta))*n.moins/length(echantillon) - eta/(1-eta)
+                
+                n.plus = n - n.moins
+                
+                if(n.plus == 0 | n.moins == 0){
+                    an = 1/(1-eta)**2
+                }
+                else{
+                    denom.1 = n.moins/(eta/(1-eta) + hatpi)**2
+                    denom.2 = n.plus/(1-hatpi)**2
+                    an = n/(denom.1 + denom.2)
+                }
+                
+                s = sqrt(n/an)*hatpi
+                
+                return(c(hatpi,an,s))
+            }
+            
+        \end{minted}
+    \end{script}
+
+    \begin{center}
+        $ (\mathbb{X},\eta) \longmapsto (\hat\pi(\mathbb{X},\eta),a(\mathbb{X},\eta),s(\mathbb{X},\eta)) $
+    \end{center}
+
+\clearpage
+\pagebreak
+\newpage
+
+    \begin{fonction}[t]
+       \caption{\texttt{MATRICE\_STATISTIQUE}}
+       \textbf{Arguments:} \texttt{matrice.dechantillonnage, eta} \\
+        \texttt{matrice.dechantillonnage}: $\mathbb{X}_{n_{exp},n}$ \\
+        \texttt{eta}: $\eta$ \\
+        \textbf{Définit lors de l'execution:} Dans l'environnement global ($i.e.$: \texttt{.GlobalEnv}) la matrice \texttt{matrice.statistique}.
+    \end{fonction}
+
+    \begin{script}[t]
+        \caption{Matrice de statistiques}
+        \begin{minted}[linenos, breaklines, fontsize=\scriptsize, bgcolor=lightgray]{R}
+            MATRICE_STATISTIQUE = function(matrice.dechantillonnage, eta){
+                matrice.statistique = t(apply(X = matrice.dechantillonnage, eta = eta, FUN = CALCUL_STATISTIQUE, MARGIN = 1))
+                
+                matrice.statistique = data.frame(matrice.statistique)
+                names(matrice.statistique) = c("hatpi","an","t")
+                
+                assign("matrice.statistique", matrice.statistique, envir = .GlobalEnv) 
+              }
+        \end{minted}
+    \end{script}
+
+
+    $$
+    (\mathbb{X}_{n_{exp},n}, \eta) =                         
+    (\begin{bmatrix}
+        \mathbb{X}^{(1)} \\
+        \mathbb{X}^{(2)} \\
+        \ldots \\
+        \mathbb{X}^{(n_{exp})}
+    \end{bmatrix},\eta) 
+    \longmapsto 
+    \begin{bmatrix}
+        \hat\pi(\mathbb{X}^{(1)},\eta) & a(\mathbb{X}^{(1)},\eta) & s(\mathbb{X}^{(1)},\eta) \\
+        \hat\pi(\mathbb{X}^{(2)},\eta) & a(\mathbb{X}^{(2)},\eta) & s(\mathbb{X}^{(2)},\eta) \\
+        \vdots & \vdots & \vdots \\
+        \hat\pi(\mathbb{X}^{(n_{exp})},\eta) & a(\mathbb{X}^{(n_{exp})},\eta) & s(\mathbb{X}^{(n_{exp})},\eta) \\
+    \end{bmatrix}
+    $$
+    \clearpage
+    \pagebreak
+    \begin{fonction}[t]
+        \caption{\texttt{VECTEUR\_T}}
+    \end{fonction}
+    \begin{script}[t]
+        \caption{\texttt{VECTEUR\_T}}
+        \begin{minted}[linenos, breaklines, fontsize=\scriptsize, bgcolor=lightgray]{R}
+            VECTEUR_T = function(matrice.dechantillonnage, discretisation.Theta_2){
+                vecteur.s = sapply(X = discretisation.Theta_2, FUN = (function(eta) MATRICE_STATISTIQUE(matrice.dechantillonnage, eta)$s) )
+                assign("vecteur.s", vecteur.s, envir = .GlobalEnv)
+                vecteur.t = apply(X = vecteur.s, FUN = max, MARGIN = 1)
+                assign("vecteur.t", vecteur.t, envir = .GlobalEnv)
+            }
+        \end{minted}
+    \end{script}
+
+    \subsubsection{Matrice $[{t}_{k,\tilde{k}}]$}
+
+
+    Chaque matrice $\Sigma^{(k)}$ est symétrique définie positive. Il y a donc $(nb2^2-nb2)/2$ termes en dessous de la diagonale à calculer, plus $nb2$ termes diagonaux. \\ 
+
+    \begin{align*}
+        b(\mathbb{X},\eta) & = \dfrac{1}{\mathbb{P}_n\big[ \{\partial_\pi\, m_{\hat\pi(\eta),\pi}\}^2 \big]}
+    \end{align*}
+
+    
+        
+
+
+
+
+
+\end{document}

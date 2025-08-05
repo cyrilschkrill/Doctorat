@@ -1,0 +1,73 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+
+\PYG{+w}{            }\PYG{n}{Pm}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{pi}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{a}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{1}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{k+kc}{pi}\PYG{o}{*}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{/}\PYG{n}{eta}\PYG{l+m}{\PYGZhy{}1}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{b}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{1}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{k+kc}{pi}
+
+\PYG{+w}{                }\PYG{n}{n.moins}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sum}\PYG{p}{(}\PYG{n}{echantillon}\PYG{o}{\PYGZlt{}}\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{n.plus}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{n.moins}
+
+\PYG{+w}{                }\PYG{n}{A}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{b}\PYG{o}{*}\PYG{n}{eta}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{a}\PYG{o}{*}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{))}\PYG{o}{/}\PYG{p}{(}\PYG{n}{a}\PYG{o}{*}\PYG{n}{b}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{B}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{0.5}\PYG{o}{*}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{+}\PYG{p}{(}\PYG{n}{n.moins}\PYG{o}{/}\PYG{n}{a}\PYG{o}{**}\PYG{l+m}{2}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{n.plus}\PYG{o}{/}\PYG{n}{b}\PYG{o}{**}\PYG{l+m}{2}\PYG{p}{)}\PYG{o}{/}\PYG{n}{n}\PYG{p}{)}
+
+\PYG{+w}{                }\PYG{n}{output}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{A}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{B}
+\PYG{+w}{                }\PYG{n+nf}{return}\PYG{p}{(}\PYG{n}{output}\PYG{p}{)}
+\PYG{+w}{              }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{              }\PYG{n}{partial.pi\PYGZus{}m}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{k+kc}{pi}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{,}\PYG{n}{x}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{premier.terme}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{eta}\PYG{o}{*}\PYG{p}{(}\PYG{l+m}{1\PYGZhy{}1}\PYG{o}{/}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{+}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{*}\PYG{k+kc}{pi}\PYG{o}{/}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{k+kc}{pi}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}
+
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{n}{x}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{n}{second.membre}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m}{1\PYGZhy{}1}\PYG{o}{/}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{+}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{*}\PYG{k+kc}{pi}\PYG{o}{/}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{3}
+\PYG{+w}{                }\PYG{n}{else}\PYG{+w}{ }\PYG{n}{second.membre}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{1}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{k+kc}{pi}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{3}
+
+\PYG{+w}{                }\PYG{n+nf}{return}\PYG{p}{(}\PYG{n}{premier.terme}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{second.membre}\PYG{p}{)}
+\PYG{+w}{              }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{              }\PYG{n}{partial.pi\PYGZus{}m\PYGZus{}\PYGZus{}SQUARRED}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{k+kc}{pi}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{,}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{partial.pi\PYGZus{}m}\PYG{p}{(}\PYG{k+kc}{pi}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{,}\PYG{n}{x}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}
+
+\PYG{+w}{              }\PYG{n}{partial2.pi\PYGZus{}Pm}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{k+kc}{pi}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{,}\PYG{n}{echantillon}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{n.moins}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sum}\PYG{p}{(}\PYG{n}{echantillon}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{p.moins}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sum}\PYG{p}{(}\PYG{n}{echantillon}\PYG{+w}{ }\PYG{o}{\PYGZlt{}}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}\PYG{o}{/}\PYG{n}{n}
+\PYG{+w}{                }\PYG{n}{p.plus}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{n}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{n.moins}\PYG{p}{)}\PYG{o}{/}\PYG{n}{n}
+
+\PYG{+w}{                }\PYG{n}{premier.terme}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{2}\PYG{o}{*}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{eta}\PYG{o}{*}\PYG{p}{(}\PYG{l+m}{1\PYGZhy{}1}\PYG{o}{/}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{+}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{*}\PYG{k+kc}{pi}\PYG{o}{/}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{3}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{k+kc}{pi}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{3}\PYG{+w}{ }\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{second.terme}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{3}\PYG{o}{*}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{p.moins}\PYG{o}{*}\PYG{p}{(}\PYG{l+m}{1\PYGZhy{}1}\PYG{o}{/}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{+}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{*}\PYG{k+kc}{pi}\PYG{o}{/}\PYG{n}{eta}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{4}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{n}{p.plus}\PYG{o}{/}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{k+kc}{pi}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{4}\PYG{+w}{  }\PYG{p}{)}
+
+\PYG{+w}{                }\PYG{n+nf}{return}\PYG{p}{(}\PYG{n}{premier.terme}\PYG{+w}{ }\PYG{o}{\PYGZhy{}}\PYG{+w}{ }\PYG{n}{second.terme}\PYG{p}{)}
+\PYG{+w}{              }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{              }\PYG{n}{HATPI}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{temp.fun}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{k+kc}{pi}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{Pm}\PYG{p}{(}\PYG{n}{echantillon}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{echantillon}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{pi}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k+kc}{pi}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{return}\PYG{p}{(}\PYG{n+nf}{optimise}\PYG{p}{(}\PYG{n}{f}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{temp.fun}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{interval}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{0}\PYG{p}{,}\PYG{l+m}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{maximum}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k+kc}{TRUE}\PYG{p}{)}\PYG{o}{\PYGZdl{}}\PYG{n}{maximum}\PYG{p}{)}
+\PYG{+w}{              }\PYG{p}{\PYGZcb{}}
+
+\PYG{+w}{              }\PYG{n}{AN}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{,}\PYG{n}{hatpi}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)\PYGZob{}}
+
+\PYG{+w}{                }\PYG{n}{numerateur}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{mean}\PYG{p}{(}\PYG{n+nf}{sapply}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{partial.pi\PYGZus{}m\PYGZus{}\PYGZus{}SQUARRED}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{pi}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hatpi}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{))}
+\PYG{+w}{                }\PYG{n}{denominateur}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{partial2.pi\PYGZus{}Pm}\PYG{p}{(}\PYG{k+kc}{pi}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hatpi}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{echantillon}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{echantillon}\PYG{p}{)}\PYG{o}{**}\PYG{l+m}{2}
+
+
+\PYG{+w}{                }\PYG{n+nf}{return}\PYG{p}{(}\PYG{n}{numerateur}\PYG{o}{/}\PYG{n}{denominateur}\PYG{p}{)}
+\PYG{+w}{              }\PYG{p}{\PYGZcb{}}
+
+
+
+
+\PYG{+w}{              }\PYG{n}{CALCUL\PYGZus{}STATISTIQUE}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                }\PYG{n}{n}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{echantillon}\PYG{p}{)}
+
+\PYG{+w}{                }\PYG{n}{hatpi}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{HATPI}\PYG{p}{(}\PYG{n}{echantillon}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{echantillon}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{an}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{AN}\PYG{p}{(}\PYG{n}{echantillon}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{echantillon}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{hatpi}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{hatpi}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+
+\PYG{+w}{                }\PYG{n}{sn}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sqrt}\PYG{p}{(}\PYG{n}{n}\PYG{o}{/}\PYG{n}{an}\PYG{p}{)}\PYG{o}{*}\PYG{n}{hatpi}
+
+\PYG{+w}{              }\PYG{c+c1}{\PYGZsh{}  return(data.frame(hatpi,an,s))}
+\PYG{+w}{                }\PYG{n+nf}{return}\PYG{p}{(}\PYG{n+nf}{c}\PYG{p}{(}\PYG{n}{hatpi}\PYG{p}{,}\PYG{n}{an}\PYG{p}{,}\PYG{n}{sn}\PYG{p}{))}
+\PYG{+w}{              }\PYG{p}{\PYGZcb{}}
+
+
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+
+\end{Verbatim}

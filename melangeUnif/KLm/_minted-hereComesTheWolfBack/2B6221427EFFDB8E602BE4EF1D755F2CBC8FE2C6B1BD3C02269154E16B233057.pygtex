@@ -1,0 +1,61 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{            }\PYG{n}{specificationDuMelange}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{nomDistribution.1}\PYG{p}{,}
+\PYG{+w}{                                              }\PYG{n}{nomDistribution.2}\PYG{p}{,}
+\PYG{+w}{                                              }\PYG{n}{parametrage.1}\PYG{p}{,}
+\PYG{+w}{                                              }\PYG{n}{nombreParametres.distribution\PYGZus{}2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{,}
+\PYG{+w}{                                              }\PYG{n}{positionParam.2\PYGZus{}inconnu}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{,}
+\PYG{+w}{                                              }\PYG{n}{valeurParam.2\PYGZus{}connue}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k+kc}{NaN}\PYG{p}{)\PYGZob{}}
+
+\PYG{+w}{                }\PYG{n}{distributionList}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}exp\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}norm\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}lnorm\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}weibull\PYGZdq{}}\PYG{p}{,}\PYG{l+s}{\PYGZdq{}unif\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n}{test}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{nomDistribution.1}\PYG{+w}{ }\PYG{o}{\PYGZpc{}in\PYGZpc{}}\PYG{+w}{ }\PYG{n}{distributionList}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{\PYGZam{}}\PYG{+w}{ }\PYG{p}{(}\PYG{n}{nomDistribution.1}\PYG{+w}{ }\PYG{o}{\PYGZpc{}in\PYGZpc{}}\PYG{+w}{ }\PYG{n}{distributionList}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{+w}{ }\PYG{n}{test}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{k+kc}{FALSE}\PYG{+w}{ }\PYG{p}{)\PYGZob{}}\PYG{+w}{ }\PYG{n+nf}{print}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Erreur de saisie dans le nom d\PYGZsq{}une des composantes\PYGZdq{}}\PYG{p}{)\PYGZcb{}}
+
+\PYG{+w}{                }\PYG{c+c1}{\PYGZsh{} PREMIERE COMPOSANTE \PYGZsh{}}
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{parametrage.1}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{rf1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}r\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.1}\PYG{p}{))(}\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{parametrage.1}\PYG{p}{)}
+\PYG{+w}{                    }\PYG{n}{df1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}d\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.1}\PYG{p}{))(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{parametrage.1}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{n+nf}{length}\PYG{p}{(}\PYG{n}{parametrage.1}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m}{2}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{rf1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{n}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}r\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.1}\PYG{p}{))(}\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{parametrage.1}\PYG{p}{[}\PYG{l+m}{1}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{parametrage.1}\PYG{p}{[}\PYG{l+m}{2}\PYG{p}{])}
+\PYG{+w}{                    }\PYG{n}{df1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}d\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.1}\PYG{p}{))(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{parametrage.1}\PYG{p}{[}\PYG{l+m}{1}\PYG{p}{],}\PYG{+w}{ }\PYG{n}{parametrage.1}\PYG{p}{[}\PYG{l+m}{2}\PYG{p}{])}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}rf1\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rf1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}df1\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{df1}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+
+\PYG{+w}{                }\PYG{c+c1}{\PYGZsh{} DEUXIEME COMPOSANTE \PYGZsh{}}
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{n}{nombreParametres.distribution\PYGZus{}2}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{rf2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}r\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.2}\PYG{p}{))(}\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                    }\PYG{n}{df2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}d\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.2}\PYG{p}{))(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{n}{else}\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} nombreParametres.distribution\PYGZus{}2 == 2}
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{n}{nombreParametres.distribution\PYGZus{}2}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+m}{2}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{return}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Erreur: Le nombre de paramètres de la composante ne peut que prendre les valeurs 1 ou 2.\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{n}{positionParam.2\PYGZus{}inconnu}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{rf2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}r\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.2}\PYG{p}{))(}\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{valeurParam.2\PYGZus{}connue}\PYG{p}{)}
+\PYG{+w}{                    }\PYG{n}{df2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}d\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.2}\PYG{p}{))(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{valeurParam.2\PYGZus{}connue}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{n}{else}\PYG{p}{\PYGZob{}}\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} positionParam.2\PYGZus{}inconnu == 2}
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{n}{positionParam.2\PYGZus{}inconnu}\PYG{+w}{ }\PYG{o}{!=}\PYG{+w}{ }\PYG{l+m}{2}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{return}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}Erreur: La position du paramètre inconnu de la seconde composante.\PYGZdq{}}\PYG{p}{)}
+\PYG{+w}{                    }\PYG{n}{rf2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}r\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.2}\PYG{p}{))(}\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{valeurParam.2\PYGZus{}connue}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                    }\PYG{n}{df2}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{n+nf}{get}\PYG{p}{(}\PYG{n+nf}{paste0}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}d\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{nomDistribution.2}\PYG{p}{))(}\PYG{n}{x}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{valeurParam.2\PYGZus{}connue}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}rf2\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rf2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}df2\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{df2}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+
+\PYG{+w}{                }\PYG{c+c1}{\PYGZsh{} FONCTIONS DU MELANGE \PYGZsh{}}
+\PYG{+w}{                }\PYG{n}{rmix}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{n}\PYG{p}{,}\PYG{k+kc}{pi}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                    }\PYG{n}{output}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sample}\PYG{p}{(}\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{0}\PYG{p}{,}\PYG{l+m}{1}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{size}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{replace}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k+kc}{TRUE}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{prob}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{c}\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{k+kc}{pi}\PYG{p}{,}\PYG{k+kc}{pi}\PYG{p}{))}
+
+\PYG{+w}{                    }\PYG{n}{nb1}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{sum}\PYG{p}{(}\PYG{n}{output}\PYG{p}{)}
+
+\PYG{+w}{                    }\PYG{n}{output}\PYG{p}{[}\PYG{n}{output}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m}{1}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{rf2}\PYG{p}{(}\PYG{n}{nb1}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}
+\PYG{+w}{                    }\PYG{n}{output}\PYG{p}{[}\PYG{n}{output}\PYG{+w}{ }\PYG{o}{==}\PYG{+w}{ }\PYG{l+m}{0}\PYG{p}{]}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{rf1}\PYG{p}{(}\PYG{n}{n}\PYG{o}{\PYGZhy{}}\PYG{n}{nb1}\PYG{p}{)}
+
+\PYG{+w}{                    }\PYG{n+nf}{return}\PYG{p}{(}\PYG{n}{output}\PYG{p}{)}
+\PYG{+w}{                }\PYG{p}{\PYGZcb{}}
+\PYG{+w}{                }\PYG{n}{dmix}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{k+kc}{pi}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}\PYG{+w}{ }\PYG{p}{(}\PYG{l+m}{1}\PYG{o}{\PYGZhy{}}\PYG{k+kc}{pi}\PYG{p}{)}\PYG{o}{*}\PYG{n+nf}{df1}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}\PYG{+w}{ }\PYG{o}{+}\PYG{+w}{ }\PYG{k+kc}{pi}\PYG{o}{*}\PYG{n+nf}{df2}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,}\PYG{n}{eta}\PYG{p}{)}
+
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}rmix\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{rmix}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}dmix\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{dmix}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}

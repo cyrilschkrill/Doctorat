@@ -1,0 +1,8 @@
+\begin{Verbatim}[commandchars=\\\{\}]
+\PYG{+w}{            }\PYG{n}{MATRICE\PYGZus{}ECHANTILLONNAGE}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{function}\PYG{p}{(}\PYG{n}{nexp}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{n}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{pi.star}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta.star}\PYG{p}{)\PYGZob{}}
+\PYG{+w}{                }\PYG{n+nf}{if}\PYG{p}{(}\PYG{o}{!}\PYG{n+nf}{exists}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}rmix\PYGZdq{}}\PYG{p}{))}\PYG{+w}{ }\PYG{l+s}{\PYGZdq{}La spécification du mélange n\PYGZsq{}a pas opérée.\PYGZdq{}}
+
+\PYG{+w}{                }\PYG{n}{matrice.dechantillonnage}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{matrix}\PYG{p}{(}\PYG{n}{data}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{rmix}\PYG{p}{(}\PYG{n}{n}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{n}\PYG{o}{*}\PYG{n}{nexp}\PYG{p}{,}\PYG{+w}{ }\PYG{k+kc}{pi}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{pi.star}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{eta}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{eta.star}\PYG{p}{),}\PYG{+w}{ }\PYG{n}{nrow}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{nexp}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{byrow}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{k+kc}{TRUE}\PYG{p}{)}
+\PYG{+w}{                }\PYG{n+nf}{assign}\PYG{p}{(}\PYG{l+s}{\PYGZdq{}matrice.dechantillonnage\PYGZdq{}}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{matrice.dechantillonnage}\PYG{p}{,}\PYG{+w}{ }\PYG{n}{envir}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n}{.GlobalEnv}\PYG{p}{)}
+\PYG{+w}{            }\PYG{p}{\PYGZcb{}}
+\end{Verbatim}
